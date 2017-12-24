@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% block head %}
+	<meta charset="utf-8">
+	<meta lang="en">
+	<title>YouBook</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='layout.css')}}">
+  <!-- standalone link -->
+  <!-- <link rel="stylesheet" type="text/css" href="../static/layout.css"> -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  {% endblock %}
+</head>
+<body>
+	<div class="header-container">
+		<div class="app-name">
+			<h2>{% block title %}{% endblock %}</h2>
+		</div>
+		<div class="home">
+			<button class = "btn btn-default btn-md">
+        <a href="{{url_for('displayMain_all')}}">
+          <span class = "glyphicon glyphicon-home">
+            Home
+          </span>
+          {% block back %}
+          {% endblock %}
+        </a>
+      </button>
+		</div>
+	</div>
+  <div class="main-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div class="footer-container">
+    <img src="{{url_for('static', filename='images/social-icons.svg')}}" usemap="#socialmap"/>
+  </div>
+  <map name="socialmap">
+    <area shape="circle" coords="18, 17, 17" href="https://www.facebook.com/" target="_blank">
+    <area shape="circle" coords="58, 17, 17" href="https://twitter.com/" target="_blank">
+    <area shape="circle" coords="98, 17, 17" href="https://www.instagram.com/" target="_blank">
+  </map>
+</body>
+</html>

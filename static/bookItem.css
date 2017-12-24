@@ -1,0 +1,21 @@
+.book-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.description-area {
+
+  border: 1px solid grey;
+  padding: 10px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}

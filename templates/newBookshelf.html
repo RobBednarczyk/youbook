@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %} New bookshelf {% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='newBookshelf.css')}}">
+{% endblock %}
+{% block content %}
+    <div class="flash">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+                {% for message in messages %}
+                  <em><strong><li>{{message}}</li></strong></em>
+                {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+    <h2>Please enter the data regarding the new bookshelf:</h2>
+    <div class="form-container">
+      <form method="POST" action="{{url_for('newBookshelf')}}">
+        <div class="form-elements">
+          <label for="newName">Name:</label>
+          <input type="text" id="newName" name="newName">
+          <label for="imageURL">Image Url (optional):</label>
+          <input type="text" id="imageURL" name="imageURL">
+        </div>
+        <div class="add-button">
+          <input type="submit" value="Add">
+        </div>
+      </form>
+      <div class="error-container">
+        {{error}}
+      </div>
+    </div>
+{% endblock %}

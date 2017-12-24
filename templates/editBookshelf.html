@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Edit Bookshelf{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='editBookshelf.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+  <h2>The selected item will be edited!</h2>
+</div>
+
+<div class = "book-item">
+  <div class = "bookPicture-container">
+    <img src = "{{bookshelf.image_url}}" alt = "No image available">
+  </div>
+  <strong><p>{{bookshelf.name}}</p></strong>
+  Created by:
+  <em><p>{{creators[bookshelf.name]}}</p></em>
+</div>
+
+<div class = "form-container">
+  <form action="{{url_for('editBookshelf', bookshelf_id = bookshelf.id)}}"
+    method = "POST">
+    <div class="form-elements">
+      <label for="title">Name:</label>
+      <input type="text" id="title" name="name">
+      <label for="imageURL">Image Url (optional):</label>
+      <input type="text" id="imageURL" name="imageURL">
+    </div>
+    <div class="add-button">
+      <input type="submit" value="Edit">
+    </div>
+  </form>
+</div>
+
+{% endblock %}

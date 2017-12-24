@@ -1,0 +1,30 @@
+.form-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+}
+
+.error-container {
+  color: red;
+}
+
+.thirdParty-providers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.flash {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

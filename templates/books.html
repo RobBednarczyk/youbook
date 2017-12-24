@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block title %}Books{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='books.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="flash">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+          <em><strong>{{message}}</strong></em>
+        {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<h2>Books in the <strong><em>{{bookshelf.name}}</em></strong> bookshelf:</h2>
+<div class = "books-grid">
+  {% if books %}
+
+    {% for book in books %}
+      <div class = "book-item">
+        <div class = "bookPicture-container">
+        <a href = "{{url_for('bookItem', bookshelf_id = bookshelf.id, book_id = book.id)}}">
+            <img src = "{{book.image_url}}" alt = "No image available">
+        </a>
+        </div>
+        <strong><p>{{book.title}}</p></strong>
+        <p>{{book.author}}</p>
+        <div class = "options-panel">
+          <a href = "{{url_for('editBook', bookshelf_id = book.bookshelf_id,
+            book_id = book.id)}}">
+            <button type = "button" class = "btn btn-default btn-md">
+              <span class = "glyphicon glyphicon-pencil"> Edit </span>
+            </button>
+          </a>
+          <a href="{{url_for('deleteBook', bookshelf_id = book.bookshelf_id,
+            book_id = book.id)}}">
+            <button type = "button" class = "btn btn-default btn-md">
+              <span class = "glyphicon glyphicon-trash"> Delete </span>
+            </button>
+          </a>
+
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h3>No books available in the selected bookshelf</h3>
+  {% endif %}
+</div>
+
+<div class = "menu">
+    <a href="{{url_for('newBook', bookshelf_id = bookshelf.id)}}">
+      <div class = "btn btn-default btn-md">
+        <span class = "glyphicon glyphicon-plus">
+          New book
+        </span>
+      </div>
+    </a>
+</div>
+
+{% endblock %}

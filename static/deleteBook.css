@@ -1,0 +1,16 @@
+.book-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert {
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

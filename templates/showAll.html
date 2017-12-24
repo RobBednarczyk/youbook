@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta lang="en">
+	<title>YouBook</title>
+
+
+
+	<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='showAll.css')}}">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link rel="icon" href="{{url_for('static', filename='favicon.ico')}}">
+
+</head>
+<body>
+	<div class="header-container">
+		<div class="app-name">
+			<h2>YouBook App</h2>
+		</div>
+		{% if not username %}
+			<div class="login-buttons">
+					<a href="{{url_for('newUser')}}">
+						<div class = "btn btn-default btn-md">
+							<span class = "glyphicon glyphicon-check"> SignUp</span>
+						</div>
+					</a>
+					<a href="{{url_for('loginPage')}}">
+						<div class = "btn btn-default btn-md">
+							<span class = "glyphicon glyphicon-play"> LogIn</span>
+						</div>
+					</a>
+			</div>
+		{% else %}
+			<div class="logout-button">
+				<p>Welcome {{username.split(" ")[0]}}</p>
+				<div>
+					<img class="picture" src="{{image}}" alt="Picture N/A" />
+				</div>
+					<a href="{{url_for('disconnect')}}">
+						<div class = "btn btn-default btn-md">
+							<span class = "glyphicon glyphicon-off"> LogOut</span>
+						</div>
+					</a>
+			</div>
+		{% endif %}
+
+	</div>
+	<div class="greetings">
+		<h1><em>YouBook</em></h1>
+		<h2>Create your bookshelf and show it to the world!</h2>
+	</div>
+
+	<div class="flash">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<ul>
+					{% for message in messages %}
+						<em><strong><li>{{message}}</li></strong></em>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		{% endwith %}
+	</div>
+
+	<div class="canvas">
+	<div class="main-container">
+
+		<div class="mainPicture-container">
+			<img src="{{url_for('static', filename='images/bookshelf_main.png')}}" alt="No image available" />
+		</div>
+		<div class="bookshelves-container">
+				<h2>Bookshelves by user</h2>
+				<div class="newBookshelf">
+						<a href={{url_for("newBookshelf")}}>
+							<div class = "btn btn-default btn-md">
+								<span class = "glyphicon glyphicon-plus">
+									New bookshelf
+								</span>
+							</div>
+						</a>
+				</div>
+			<div class="bookshelf-grid">
+			{% for bookshelf in bookshelves %}
+				<div class="bookshelf">
+					<div class="bookshelfPicture-container">
+						<a href="{{url_for('bookshelfBooks', bookshelf_id=bookshelf.id)}}">
+							<img src="{{bookshelf.image_url}}" alt="No image available">
+						</a>
+					</div>
+					<strong><p>{{bookshelf.name}}</p></strong>
+					Created by:
+					<em><p>{{creators[bookshelf.name]}}</p></em>
+					<div class = "options-panel">
+					<a href="{{url_for('editBookshelf', bookshelf_id = bookshelf.id)}}">
+						<button type = "button" class = "btn btn-default btn-md">
+							<span class = "glyphicon glyphicon-pencil"> Edit </span>
+						</button>
+					</a>
+					<a href="{{url_for('deleteBookshelf', bookshelf_id = bookshelf.id)}}">
+						<button type = "button" class = "btn btn-default btn-md">
+							<span class = "glyphicon glyphicon-trash"> Delete </span>
+						</button>
+					</a>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+		<h2>Recently added items:</h2>
+		<div class="recentBooks-container">
+			<div class="recentBooks-grid">
+
+				{% for book in recentBooks %}
+					<div class="books-grid-item">
+						<a href="{{url_for('bookItem', bookshelf_id = book.bookshelf_id,
+							book_id = book.id)}}">
+							<div class="bookPicture-container">
+								<img src="{{book.image_url}}" alt="No image available">
+							</div>
+						</a>
+						<p>{{book.title}}</p>
+						<p>{{book.author}}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+	</div>
+	</div>
+
+	<div class="footer-container">
+    <img src="{{url_for('static', filename='images/social-icons.svg')}}" />
+    <!-- standalone link -->
+    <!-- <img src="../static/images/social-icons.svg" alt="Not available" /> -->
+  </div>
+</body>
+</html>

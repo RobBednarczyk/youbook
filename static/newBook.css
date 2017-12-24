@@ -1,0 +1,63 @@
+h2, h3 {
+  margin: 10px;
+  text-align: center;
+}
+
+.form-container {
+  border: 1px solid black;
+  border-radius: 5%;
+}
+
+.form-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.form-elements label {
+  margin-top: 10px;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.add-button {
+  margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.gbooks-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.gbooks-item {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.gbooks-item p {
+  text-align: center;
+}
+
+.error-container {
+  color: red;
+}
+
+.flash {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

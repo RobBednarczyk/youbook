@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Delete book{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='deleteBookshelf.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+  <h2>The selected item will be deleted!</h2>
+</div>
+
+<div class = "book-item">
+  <div class = "bookPicture-container">
+    <img src = "{{bookshelf.image_url}}" alt = "No image available">
+  </div>
+  <strong><p>{{bookshelf.name}}</p></strong>
+  Created by:
+  <em><p>{{creators[bookshelf.name]}}</p></em>
+
+</div>
+
+<div class = "form-container">
+  <form action="{{url_for('deleteBookshelf', bookshelf_id = bookshelf.id)}}"
+    method = "POST">
+    <div class = "btn-group">
+      <button type="submit" value="Yes" name="delAnswer" class = "btn btn-default btn-md">
+        <span class = "glyphicon glyphicon-ok"> Confirm </span>
+      </button>
+      <button type="submit" value="No" name="delAnswer" class = "btn btn-default btn-md">
+        <span class = "glyphicon glyphicon-remove"> Cancel </span>
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

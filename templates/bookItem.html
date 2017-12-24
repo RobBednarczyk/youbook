@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Book info{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bookItem.css')}}">
+{% endblock %}
+{% block back %}
+<div class="back">
+  <button class = "btn btn-default btn-md">
+    <a href="{{url_for('bookshelfBooks', bookshelf_id = book.bookshelf_id)}}">
+      <span class = "glyphicon glyphicon-step-backward">
+        Back
+      </span>
+    </a>
+  </button>
+</div>
+{% endblock %}
+{% block content %}
+<h2>Details:</h2>
+{% if book %}
+  <div class = "book-item">
+    <img src = "{{book.image_url}}" alt = "No image available">
+    <strong><p>{{book.title}}</p></strong>
+    <p>{{book.author}}</p>
+    <p>{{book.category}}</p>
+    <div class = "description-area">
+      {{book.description}}
+    </div>
+  </div>
+{% else %}
+    <h3>No books available in the selected bookshelf</h3>
+{% endif %}
+
+{% endblock %}
